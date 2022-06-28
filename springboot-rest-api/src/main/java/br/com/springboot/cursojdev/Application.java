@@ -1,4 +1,4 @@
-package br.com.springbot.cursojdev;
+package br.com.springboot.cursojdev;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args); /* linha centro do projeto */
+		System.out.println("deu certo");
+	}
 }

@@ -1,4 +1,4 @@
-package br.com.springbot.cursojdev.controllers;
+package br.com.springboot.cursojdev.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
