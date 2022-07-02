@@ -12,9 +12,27 @@
 </head>
 <body>
 
-	<h1> Pagina Principal</h1>
 
-	<h3>Spring Boot REST API CRUD Completo é ç</h3>
+
+	<div class="container">
+		<h3>Spring Boot REST API CRUD Completo</h3>
+		<form action="" id="formCadastroUser">
+			<div class="mb-3">
+				<label for="id" class="form-label">ID </label> <input type="text"
+					class="form-control" id="id" readonly="readonly">
+			</div>
+			<div class="mb-3">
+				<label for="nome" class="form-label">Nome</label> <input type="text"
+					class="form-control" id="nome" required="required"
+					placeholder="Digite seu nome">
+			</div>
+			<div class="mb-3">
+				<label for="idade" class="form-label">Idade </label> <input
+					type="number" class="form-control" id="idade"
+					placeholder="Digite sua idade" required="required">
+			</div>
+		</form>
+	</div>
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script
