@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -75,6 +76,15 @@ public class GreetingsController {
 		return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
 
 	}
+	
+	// metodo atualizar
+		@PutMapping(value = "atualizar") // mapeia a url
+		@ResponseBody // descrisao da resposta
+		public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario) { // receber os dados para salvar no banco
+			Usuario user = usuarioRepository.saveAndFlush(usuario);// atualiza direto no banco
+			return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+
+		}
 
 	// metodo delete
 	@DeleteMapping(value = "delete") // mapeia a url
@@ -94,5 +104,7 @@ public class GreetingsController {
 		return new ResponseEntity<Usuario>(user, HttpStatus.OK);
 
 	}
+	
+	
 
 }
