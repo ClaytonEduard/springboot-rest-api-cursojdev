@@ -96,9 +96,9 @@
 
 	<script type="text/javascript">
 	// funcao pesquisa usuario
-		 function pesquisarUser(){
+	function pesquisaUser(){
 		var nome = $('#nomeBusca').val();
-		if(nome != null && nome.trim()!= ''){
+		if(nome != null && nome.trim() != ''){
 			$.ajax({
 				method : "GET",
 				url : "buscarPorNome",
@@ -108,18 +108,39 @@
 				$('#tabelaResultados > tbody > tr').remove();
 				
 				for(var i = 0; i < response.length;i++){
-					$('#tabelaResultados > tbody').append('<tr><td>'+response[i].id+'</td> <td>'+response[i].nome+'</td></tr>')
-				}
+					$('#tabelaResultados > tbody').append('<tr><td>'+response[i].id+'</td><td>'+response[i].nome+'</td><td><button type="button" onclick="colocarEmEdicao('+response[i].id+')" class="btn btn-primary">Ver</button></td></tr>')
+					}
 					
 				}
 
 			}).fail(function(xhr, status, errorThrown) {
 				alert("Erro ao Buscar: " + xhr.responseText);
-		});
-		}
+			});
+			}
+		}	
+	
+	
+	
+	// fuccao passar dados da tabela pesquisa para html
+		function colocarEmEdicao(id){
+		
+			$.ajax({
+				method : "GET",
+				url : "buscaruserid",
+				data : "id=" + id,
+				success : function(response) {
+				    $("#id").val(response.id);
+					$("#nome").val(response.nome);
+					$("#idade").val(response.idade);
+					
+					$('#modalPesquisarUser').modal('hide');
+				}
+			}).fail(function(xhr, status, errorThrown) {
+				alert("Erro ao Buscar usuario por id: " + xhr.responseText);
+			});
+		
+		
 	}
-	
-	
 	
 	
 		function salvarUsuario() {
