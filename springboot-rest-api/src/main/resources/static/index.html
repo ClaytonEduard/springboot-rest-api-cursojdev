@@ -97,18 +97,20 @@
 	<script type="text/javascript">
 	// funcao pesquisa usuario
 		 function pesquisarUser(){
-		var nome = $("#nomeBusca").val();
-		if(nome != null && nome.trim()!= ""){
+		var nome = $('#nomeBusca').val();
+		if(nome != null && nome.trim()!= ''){
 			$.ajax({
 				method : "GET",
 				url : "buscarPorNome",
-				data : JSON.stringify({
-					id:id,
-					nome:nome,
-					idade,idade}),
-				contentType : "application/json; charset=uft-8",
+				data : "name=" + nome,
 				success : function(response) {
-					//alert("Usuário salvo com sucesso!");
+				//DAODOS DO RESPONSE POPLUADOS na tabela
+				$('#tabelaResultados > tbody > tr').remove();
+				
+				for(var i = 0; i < response.length;i++){
+					$('#tabelaResultados > tbody').append('<tr><td>'+response[i].id+'</td> <td>'+response[i].nome+'</td></tr>')
+				}
+					
 				}
 
 			}).fail(function(xhr, status, errorThrown) {
