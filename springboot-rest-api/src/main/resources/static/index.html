@@ -8,15 +8,25 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<title>Index</title>
+<title>Cadastro de Usuário</title>
 </head>
+
+<style type="text/css">
+html {
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 5%;
+}
+</style>
+
+
+
 <body>
 
-
-
-	<div class="container">
-		<h3>Spring Boot REST API CRUD Completo</h3>
-		<form action="" id="formCadastroUser">
+	<div class="container" style="padding: 1em; border: 1em;">
+		<h3 class="" style="text-align: center;">SPRING BOOT REST API
+			CRUD BASÍCO COMPLETO</h3>
+		<form action="" id="formCadastroUser" style="margin-top: 3em;">
 			<div class="mb-3">
 				<label for="id" class="form-label">ID </label> <input type="text"
 					class="form-control" id="id" readonly="readonly">
@@ -31,14 +41,16 @@
 					type="number" class="form-control" id="idade"
 					placeholder="Digite sua idade" required="required">
 			</div>
-
-			<button type="button" class="btn btn-primary"
-				onclick="salvarUsuario()">Salvar</button>
-			<button type="button" class="btn btn btn-warning"
-				onclick="this.form.reset()">Novo</button>
-			<button type="button" class="btn btn-danger" data-bs-toggle="modal"
-				data-bs-target="#modalPesquisarUser">Buscar</button>
-
+			<div class="d-grid gap-2 col-6 mx-auto">
+				<button type="button" class="btn btn-primary"
+					onclick="salvarUsuario()">Salvar</button>
+				<button type="button" class="btn btn btn-secondary"
+					onclick="this.form.reset()">Novo</button>
+				<button type="button" class="btn btn-warning" data-bs-toggle="modal"
+					data-bs-target="#modalPesquisarUser">Buscar</button>
+				<button type="button" class="btn btn-danger"
+					onclick="botaoDeletarDaTela()">Excluir</button>
+			</div>
 		</form>
 	</div>
 
@@ -60,19 +72,21 @@
 						<button type="button" class="btn btn-success"
 							onclick="pesquisaUser()">Buscar</button>
 					</form>
-					<table class="table table-striped" id="tabelaResultados">
-						<thead>
-							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Nome</th>
-								<th scope="col">Editar</th>
-								<th scope="col">Delete</th>
-							</tr>
-						</thead>
-						<tbody>
+					<div style="height: 300px; overflow: scroll;">
+						<table class="table table-striped" id="tabelaResultados">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Nome</th>
+									<th scope="col">Editar</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody>
 
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div>
 
 				</div>
 				<div class="modal-footer">
@@ -96,6 +110,27 @@
 
 
 	<script type="text/javascript">
+	
+	function botaoDeletarDaTela(id){
+		var id = $("#id").val();
+		
+		if(id != null && id.trim()!= ''){
+			
+		deleteUser(id);
+		// duas forma de resetar o formulario html -  this se do lado do html
+		// this.form.reset();
+		document.getElementById('formCadastroUser').reset();
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	function deleteUser(id){
 		
 		if(confirm('Deseja realmente deletar?')){
@@ -168,12 +203,26 @@
 	
 	
 		function salvarUsuario() {
+			
+			
 			var id = $("#id").val();
 			var nome = $("#nome").val();
 			var idade = $("#idade").val();
 
+			// validacao basica com javascript
+			if(nome == null || nome !=null && nome.trim()==''){
+				$("#nome").focus();
+				alert('Informe o nome');
+				return;
+			}
+			
+			if(idade == null || idade !=null && idade.trim()==''|| idade >=0 ){
+				$("#idade").focus;
+				alert('Informe a idade');
+				return;
+			}
+					
 			//metodo de salvar no banco com jquery
-
 			$.ajax({
 				method : "POST",
 				url : "salvar",
@@ -186,7 +235,8 @@
 
 			}).fail(function(xhr, status, errorThrown) {
 				alert("Erro ao salvar: " + xhr.responseText);
-		});
+			});
+			
 
 		}
 	</script>
